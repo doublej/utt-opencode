@@ -1,0 +1,8 @@
+{
+  "description": "",
+  "archived": false,
+  "agent-log": {
+    "mode": "warn",
+    "aliases": {}
+  }
+}

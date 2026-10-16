@@ -73,3 +73,12 @@ bun test
 bun run build   # dist/tui.js
 just check      # all three; CI runs the same
 ```
+
+<!-- agent-log:policy -->
+### Shared agent journal
+
+`./agent-log` (shim for `atlas agent-log`) is the short-lived journal concurrent agents in this
+repo share; the issue tracker stays the source of truth.
+- Run `./agent-log recent` before interpreting shared state.
+- Full policy (intents, the `run` wrapper, findings, handoff, scopes): `./agent-log --help`.
+<!-- /agent-log:policy -->
