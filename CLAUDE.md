@@ -1,8 +1,14 @@
-# opencode
+# utt-opencode
 
 OpenCode CLI plugin: `ctrl+s` dictates into the prompt through utt. OpenCode draws
 the dictation (meter, live words, transcript); utt shows and pastes nothing.
-User-facing contract and file table: `README.md`.
+User-facing contract and file table: `README.md`. Published on npm as `utt-opencode`.
+
+Standalone repo (github.com/doublej/utt-opencode), split out of the utt monorepo
+with its history. The utt side lives in github.com/doublej/utt (local checkout
+`~/dev/swift/utt`): the dictation hand-over is
+`UttCore/Sources/UttCore/Extensions/Dictation/` and
+`Utt/Features/Transcription/TranscriptionFeature+Lanes.swift`.
 
 ## Layout
 
@@ -21,8 +27,7 @@ User-facing contract and file table: `README.md`.
 
 - **The dictation is utt's to hand over (`ownsDictation`, `utt://start?for=opencode`).**
   The first `opencode.level.json` write is the proof; until one arrives the plugin
-  never touches the prompt, because utt is then pasting the text itself. The utt
-  side is `UttCore/.../Extensions/Dictation/` and `TranscriptionFeature+Lanes.swift`.
+  never touches the prompt, because utt is then pasting the text itself.
 - **Every handed-over dictation ends in one transcript write** (`""` for nothing),
   so `finishing` ends on a file, not a timer. The 30 s wait only covers utt dying.
 - **No key ever waits on utt.** Dictate during `finishing` starts the next take
@@ -48,8 +53,13 @@ User-facing contract and file table: `README.md`.
   only, and optional peers in the published package.** OpenCode supplies them at
   runtime; a second solid-js breaks reactivity. Never move them to `dependencies`.
 - **Published to npm as `utt-opencode`** (`opencode plugin add utt-opencode`).
-  OpenCode runs the TypeScript source as is, so there is no build step; `files`
-  ships `tui.ts`, `src/` and the README, never `tests/`.
+  OpenCode compiles JSX only outside `node_modules`, so the package ships
+  `dist/tui.js` (built by `build.ts` in `prepack`), plus the README and LICENSE.
+  Never `src/`, `tests/` or `assets/`; the README's image uses an absolute
+  raw.githubusercontent URL so it shows on npm too. A local checkout loads
+  `tui.ts` directly.
+- **Publishing needs the user's passkey.** Agents bump the version and update
+  `CHANGELOG.md`; the user runs `npm publish --access public`.
 - **Relies on unexported OpenCode behaviour:** `currentFocusedEditor` being the
   prompt textarea (with `extmarks` and `syntaxStyle`), the `prompt.clear` command
   id, and Enter being bound to `return`. Re-test after upgrades.
@@ -58,5 +68,8 @@ User-facing contract and file table: `README.md`.
 
 ```bash
 bun install
-just opencode-check
+bun run check   # tsc --noEmit
+bun test
+bun run build   # dist/tui.js
+just check      # all three; CI runs the same
 ```

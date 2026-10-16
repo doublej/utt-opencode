@@ -2,23 +2,34 @@
   "name": "utt-opencode",
   "version": "0.1.1",
   "type": "module",
-  "description": "OpenCode CLI plugin: dictate into the prompt with utt, the words appearing as you speak.",
+  "description": "Voice dictation for OpenCode: talk to your coding agent, words appear in the prompt as you speak. An extension for utt, on-device speech-to-text for macOS.",
   "license": "MIT",
   "keywords": [
     "opencode",
     "opencode-plugin",
     "utt",
-    "dictation",
     "speech-to-text",
-    "transcription",
-    "macos"
+    "voice-input",
+    "dictation",
+    "voice-coding",
+    "voice-typing",
+    "macos",
+    "on-device",
+    "local-first",
+    "offline",
+    "parakeet",
+    "whisper",
+    "ai-coding-agent",
+    "coding-agent",
+    "tui",
+    "privacy",
+    "transcription"
   ],
-  "homepage": "https://github.com/doublej/utt/tree/main/opencode#readme",
-  "bugs": "https://github.com/doublej/utt/issues",
+  "homepage": "https://utt.jurrejan.com/extensions/opencode/",
+  "bugs": "https://github.com/doublej/utt-opencode/issues",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/doublej/utt.git",
-    "directory": "opencode"
+    "url": "git+https://github.com/doublej/utt-opencode.git"
   },
   "os": [
     "darwin"
